@@ -55,7 +55,6 @@ def result(board: List[List[Optional[str]]], action: Tuple[int, int]) -> List[Li
         raise Exception("La accion no es una accion valida.")
 
     relative_board[i][j] = player(relative_board)
-    print(relative_board)
     return relative_board
 
 
