@@ -1,6 +1,6 @@
 # CS50's Introduction to Artificial Intelligence (AI) Course Answers
 
-This repository contains my solutions and code for the problem sets and exercises from (Harvard's CS50's Introduction to Artificial Intelligence)[https://cs50.harvard.edu/ai/2024] course.
+This repository contains my solutions and code for the problem sets and exercises from [Harvard's CS50's Introduction to Artificial Intelligence](https://cs50.harvard.edu/ai/2024) course.
 
 I will be progressively adding solutions to the problem sets as I complete them throughout the course.
 
