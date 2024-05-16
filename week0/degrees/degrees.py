@@ -2,6 +2,7 @@ import csv
 import sys
 
 from util import Node, StackFrontier, QueueFrontier
+from typing import Tuple, Optional, List, Set
 
 # Maps names to a set of corresponding person_ids
 names = {}
@@ -84,16 +85,49 @@ def main():
             print(f"{i + 1}: {person1} and {person2} starred in {movie}")
 
 
-def shortest_path(source, target):
+# my implementation (colab w https://github.com/mandito02)
+def shortest_path(source: str, target: str) -> List[Tuple[str, str]] | None:
     """
     Returns the shortest list of (movie_id, person_id) pairs
     that connect the source to the target.
 
     If no possible path, returns None.
     """
+    start: Node = Node(state=source, parent=None, action=None)
 
-    # TODO
-    raise NotImplementedError
+    path: List[Tuple[str, str]] = []
+    frontier: QueueFrontier = QueueFrontier()
+    frontier.add(start)
+
+    explored: Set[Node] = set()
+
+    while True:
+        if frontier.empty():
+            return None
+
+        node: Node = frontier.remove()  # quita el primero de la cola
+
+        if node.state == target:
+            path: List[Tuple[str, str]] = []
+            while node.parent:
+                path.append(node.action)
+                node = node.parent
+            path.reverse()
+            return path
+
+        explored.add(node)
+
+        for movie_id, person_id in neighbors_for_person(node.state):
+            if not frontier.contains_state(person_id) or \
+                    person_id not in explored:
+
+                child: Node = Node(
+                    state=person_id,
+                    parent=node,
+                    action=(movie_id, person_id)
+                )
+
+                frontier.add(child)
 
 
 def person_id_for_name(name):
