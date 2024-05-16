@@ -73,10 +73,11 @@ def main():
 
     ######################## my implementation ##########################
     starting_time: float = time.time()
+    print(
+        f"Searching for a relationship between {people[source]['name']} and {people[target]['name']}...")
     # -------------------------------------------------------------------#
     path = shortest_path(source, target)
     # -------------------------------------------------------------------#
-    print("Searching for a relationship. This might take several minutes...")
     ending_time: float = time.time()
     search_duration: float = ending_time - starting_time
     #####################################################################
@@ -85,7 +86,7 @@ def main():
         print("Not connected.")
     else:
         degrees = len(path)
-        print(f"{degrees} degrees of separation.")
+        print(f"Degrees of separation: {degrees}.")
         path = [(None, source)] + path
         for i in range(degrees):
             person1 = people[path[i][1]]["name"]
