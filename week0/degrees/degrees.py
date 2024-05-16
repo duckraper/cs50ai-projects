@@ -1,5 +1,6 @@
 import csv
 import sys
+import time
 
 from util import Node, StackFrontier, QueueFrontier
 from typing import Tuple, Optional, List, Set
@@ -70,7 +71,14 @@ def main():
     if target is None:
         sys.exit("Person not found.")
 
+    ######################## my implementation ##########################
+    starting_time: float = time.time()
+    # -------------------------------------------------------------------#
     path = shortest_path(source, target)
+    # -------------------------------------------------------------------#
+    ending_time: float = time.time()
+    search_duration: float = ending_time - starting_time
+    #####################################################################
 
     if path is None:
         print("Not connected.")
@@ -83,6 +91,8 @@ def main():
             person2 = people[path[i + 1][1]]["name"]
             movie = movies[path[i + 1][0]]["title"]
             print(f"{i + 1}: {person1} and {person2} starred in {movie}")
+
+        print(f"\nFound in {search_duration} seconds.")
 
 
 # my implementation (colab w https://github.com/mandito02)
