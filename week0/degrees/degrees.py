@@ -76,6 +76,7 @@ def main():
     # -------------------------------------------------------------------#
     path = shortest_path(source, target)
     # -------------------------------------------------------------------#
+    print("Searching for a relationship. This might take several minutes...")
     ending_time: float = time.time()
     search_duration: float = ending_time - starting_time
     #####################################################################
