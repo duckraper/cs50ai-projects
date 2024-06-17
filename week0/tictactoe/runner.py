@@ -3,6 +3,7 @@ import sys
 import time
 
 import tictactoe as ttt
+import advsearch as adv  # mod
 
 pygame.init()
 size = width, height = 600, 400
@@ -10,6 +11,9 @@ size = width, height = 600, 400
 # Colors
 black = (0, 0, 0)
 white = (255, 255, 255)
+
+MINIMAX = "minimax"
+ALPHABETA = "alphabeta"
 
 screen = pygame.display.set_mode(size)
 
@@ -20,6 +24,12 @@ moveFont = pygame.font.Font("OpenSans-Regular.ttf", 60)
 user = None
 board: list[list[None]] | list[list[str | None]] = ttt.initial_state()
 ai_turn = False
+
+algorithm = MINIMAX
+
+if len(sys.argv) > 1:
+    algorithm = sys.argv[1]
+
 
 while True:
 
@@ -90,7 +100,7 @@ while True:
 
         game_over: bool = ttt.terminal(board)
         player = ttt.player(board)
-        
+
         # Show title
         if game_over:
             winner = ttt.winner(board)
@@ -111,8 +121,13 @@ while True:
         if user != player and not game_over:
             if ai_turn:
                 time.sleep(0.5)
-                move = ttt.minimax(board)
+
+                move = adv.best_move(board, algorithm)  # modificado a mi forma
+                print(f"{ttt.count=}")
+                ttt.count = 0
                 board = ttt.result(board, move)
+                
+
                 ai_turn = False
             else:
                 ai_turn = True
